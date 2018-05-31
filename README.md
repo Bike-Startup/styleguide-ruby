@@ -37,10 +37,11 @@ modified Airbnb Style Guide
 
 #空白
 ##インデント
+
 ・２つインデントを開ける際には、ソフトタブを使う
 ・caseとwhenは同じインデントの深さで表現すること
 
-```
+```ruby
 
 case
 when song.name == 'Misty'
@@ -66,7 +67,7 @@ kind = case year
 
 ・引数は全て同じ列、もしくは横一列目に記述すること
 
-```
+```ruby
 # bad
 def self.create_translation(phrase_id, phrase_key, target_locale,
                             value, user_id, do_xss_check, allow_verification)
@@ -100,7 +101,7 @@ end
 
 ・複数行における真偽表現は、インデントの後に記述する
 
-```
+```ruby
 # bad
 def is_eligible?(user)
   Trebuchet.current.launch?(ProgramEligibilityHelper::PROGRAM_TREBUCHET_FLAG) &&
@@ -121,7 +122,7 @@ end
 ・末尾の空白スペースを残さないこと
 ・インラインコメント（単一行のコメント）をする際には、コードの最後とコメントの間に空白を１つ挟むこと
 
-```
+```ruby
 # bad
 result = func(a, b)# we might want to change b to c
 
@@ -131,7 +132,7 @@ result = func(a, b) # we might want to change b to c
 
 ・コンマの後、コロンの後、セミコロンの後や{の周りと、}の前では空白を１つ使うこと
 
-```
+```ruby
 sum = 1 + 2
 a, b = 1, 2
 1 > 2 ? true : false; puts 'Hi'
@@ -139,13 +140,13 @@ a, b = 1, 2
 ```
 ・コンマの前には空白を含めてはならない
 
-```
+```ruby
 result = func(a, b)
 ```
 ・パラメーター間には空白を１つ開けること。しかし、ブロック内、パラメーターの外側は空白を開けないこと。
 さらに、ブロックの外側は空白を開けること。
 
-```
+```ruby
 # bad
 {}.each { | x,  y |puts x }
 
@@ -155,19 +156,19 @@ result = func(a, b)
 
 ・！とその引数の間には空白を開けないこと
 
-```
+```ruby
 !something
 ```
 
 ・[]、()の周りには空白を作らないこと
 
-```
+```ruby
 some(arg).other
 [1, 2, 3].length
 ```
 ・文字列補完を行う場合は、空白を省くこと
 
-```
+```ruby
 # bad
 var = "This #{ foobar } is interpolated."
 
@@ -177,7 +178,7 @@ var = "This #{foobar} is interpolated."
 
 ・範囲リテラルにおいては空白を追加しないこと
 
-```
+```ruby
 # bad
 (0 ... coll).each do |item|
 
@@ -189,7 +190,7 @@ var = "This #{foobar} is interpolated."
 ・実際の処理文章とif条件文の違いをわかりやすくするため、複数行に渡るif条件文を書く際には、
 改行を行うこと。
 
-```
+```ruby
 if @reservation_alteration.checkin == @reservation.start_date &&
    @reservation_alteration.checkout == (@reservation.start_date + @reservation.nights)
 
@@ -199,7 +200,7 @@ end
 
 ・条件文、ブロック、case文の後は改行すること。
 
-```
+```ruby
 if robot.is_awesome?
   send_robot_present
 end
@@ -209,7 +210,7 @@ robot.add_trait(:human_like_intelligence)
 
 ・異なるインデントが存在する際（クラスの周辺や処理文本体など）には改行をしてはならない。
 
-```
+```ruby
 # bad
 class Foo
 
@@ -229,7 +230,7 @@ end
 
 ・メソッド間においては、行を１つ挟まなければならないが、２つ以上挟んではならない。
 
-```
+```ruby
 def a
 end
 
@@ -239,7 +240,7 @@ end
 
 ・メソッド内部において、コードをわかりやすく細分化する際には、行を１行開けること。
 
-```
+```ruby
 def transformorize_car
   car = manufacture(options)
   t = transformer(robot, disguise)
@@ -264,7 +265,7 @@ end
 クラスを作る際には、そのクラスがどう使われ、何のために作られたのかをコメントとして明記すること。
 クラスがあろうとなかろうと、全てのファイルにはその最上部にそのファイルの内容を記すこと。
 
-```
+```ruby
 # Automatic conversion of one locale to another where it is possible, like
 # American to British English.
 module Translation
@@ -298,7 +299,7 @@ module Translation
 
 コンフィグやデータも含む全てのファイルは、ファイルレベルでのコメントが必要。
 
-```
+```ruby
 # List of American-to-British spelling variants.
 #
 # This list is made with
@@ -312,6 +313,7 @@ module Translation
 sectarianizes: sectarianises
 neutralization: neutralisation
 ...
+
 ```
 
 ##機能に関するコメント
@@ -334,7 +336,7 @@ neutralization: neutralisation
 どんなフォーマットでも利用することが可能だが、rubyでは有名な２つのフォーマットがあり、TomDocとYARDである。
 これらを使うことで下記のコードのように、簡潔にコーディングできる。
 
-```
+```ruby
 # Returns the fallback locales for the_locale.
 # If opts[:exclude_default] is set, the default locale, which is otherwise
 # always the last one in the returned list, will be excluded.
@@ -357,7 +359,7 @@ end
 複雑な処理はその処理が始まる前に、何行かのコメントを要するものである。
 明らかではない処理は、その行の終わりにコメントを持たせるべきである。
 
-```
+```ruby
 def fallbacks_for(the_locale, opts = {})
   # dup() to produce an array that we can mutate.
   ret = @fallbacks[the_locale].dup
@@ -380,7 +382,7 @@ end
 
 関連情報として、ブロック型のコメントは使うことができない。空白(ホワイトスペース)の後にそれらがあってはならないし、普通のコメントと同じくらい見やすくあってもいけない。
 
-```
+```ruby
 # bad
 =begin
 comment line
@@ -409,7 +411,7 @@ TODOコメントは、大文字のTODOという文字を含めなければなら
 TODOコメントにおいては、その名前を書かれた人が必ずその問題を解決しなければならないというわけではない。
 従って、もしTODOコメントをあなたが作れば、ほぼ全てあなたの名前がつけられることになる。
 
-```
+```ruby
 # bad
   # TODO(RS): Use proper namespacing for this constant.
 
@@ -428,7 +430,7 @@ TODOコメントにおいては、その名前を書かれた人が必ずその�
 ##メソッドの定義
 ・引数がある場合は、括弧付きでdefを利用するべき。引数がないときは括弧は省くべき。
 
-```
+```ruby
 def some_method
   # body omitted
 end
@@ -439,7 +441,7 @@ end
 ```
 ・デフォルトの固定引数を使ってはならない。キーワード引数か（Ruby2.0もしくはそれ以降それ以降の場合）、もしくはオプションハッシュを使うべきである。
 
-```
+```ruby
 # bad
 def obliterate(things, gently = true, except = [], at = Time.now)
   ...
@@ -465,7 +467,7 @@ end
 ・1行でのメソッド定義は避けるべきである。1行メソッドは現在でもまま使われることがあるが、
 メソッドの利用を望ましくないものにする文法である。
 
-```
+```ruby
 # bad
 def too_much; something; something_else; end
 
@@ -479,7 +481,7 @@ end
 メソッドを呼び出す際には、下記ルールに従い括弧を利用すること。
 ・メソッドが値を返す時
 
-```
+```ruby
 # bad
 @current_user = User.find_by_id 1964192
 
@@ -489,7 +491,7 @@ end
 
 ・１つ目の引数が括弧を利用している時
 
-```
+```ruby
 # bad
 put! (x + y) % len, value
 
@@ -498,7 +500,7 @@ put!((x + y) % len, value)
 ```
 ・括弧とメソッドの間には空白を開けてはならない
 
-```
+```ruby
 # bad
 f (3 + 2) + 1
 
@@ -508,7 +510,7 @@ f(3 + 2) + 1
 
 ・引数が存在しない場合は、括弧は省かなければならない
 
-```
+```ruby
 # bad
 nil?()
 
@@ -519,7 +521,7 @@ nil?
 ・もし、メソッドが値を返さない場合、もしくは返り値を気にしない場合、括弧は任意である。
 （ただもし引数が複数行に渡る場合には、括弧があったほうが読みやすくはなるだろう。）
 
-```
+```ruby
 # okay
 render(:partial => 'foo')
 
@@ -532,7 +534,7 @@ render :partial => 'foo'
 ##条件式のキーワード
 ・複数行のifやunlessを使うときは、thenを使わない。
 
-```
+```ruby
 # bad
 if some_condition then
   ...
@@ -545,7 +547,8 @@ end
 ```
 ・複数行のwhileやuntilにはdoは使わない。
 
-```
+
+```ruby
 # bad
 while x > 5 do
   ...
@@ -565,10 +568,11 @@ until x > 5
 end
 ```
 
-・andやorやnotは禁止。　&&、||や！を利用すること。
+
+・andやorやnotは禁止。&&、||や！を利用すること。
 中身のコードや条件式が単純な場合、もしくは中身全てが1行にまとまるのであれば、後事修飾であるifやunlessの利用は可能である。そうでない場合は利用はやめるべきである。
 
-```
+```ruby
 # bad - this doesn't fit on one line
 add_trebuchet_experiments_on_page(request_opts[:trebuchet_experiments_on_page]) if request_opts[:trebuchet_experiments_on_page] && !request_opts[:trebuchet_experiments_on_page].empty?
 
@@ -587,7 +591,7 @@ return if reconciled?
 ```
 ・else付きのunlessを利用することはできない。elseを使う場合は肯定系に直すこと。
 
-```
+```ruby
 # bad
 unless success?
   puts 'failure'
@@ -605,7 +609,7 @@ end
 
 ・複数の条件式がある場合はunlessは使えない
 
-```
+```ruby
 # bad
   unless foo? && bar?
     ...
@@ -619,7 +623,7 @@ end
 
 ・比較演算子を使ってifを利用する際には、わざわざunlessを利用して反対の意味の比較演算子を作らないこと。
 
-```
+```ruby
 # bad
   unless x == 10
     ...
@@ -648,7 +652,7 @@ end
 
 ・ifやunless、whileなどの条件式の周囲には括弧を使ってはならない。
 
-```
+```ruby
 # bad
 if (x > 10)
   ...
@@ -665,7 +669,7 @@ end
 ・非常に些細な内容のコーディングを除けば、三項演算子(?:)の利用は避けるべきである。
 しかし、if、then、else、end構造である1行の条件式に関しては三項演算子(?:)を利用するべきである。
 
-```
+```ruby
 # bad
 result = if some_condition then something else something_else end
 
@@ -675,7 +679,7 @@ result = some_condition ? something : something_else
 
 ・三項演算子はネストされるべきではない。もしそうしたいならば、ifやelseの構造が望ましい。
 
-```
+```ruby
 # bad
 some_condition ? (nested_condition ? nested_something : nested_something_else) : something_else
 
@@ -689,7 +693,7 @@ end
 ・複数行に渡る条件式の場合は三項演算子は避けるべきである。三項演算子は1行の条件式の場合に利用するべきである。
 ・複数行に渡る三項演算子は避け、代わりにif、then、else、endを利用するべきである。
 
-```
+```ruby
 # bad
 some_really_long_condition_that_might_make_you_want_to_split_lines ?
   something : something_else
@@ -711,7 +715,7 @@ end
 ・早く返り値を返すために、ネストやインデントの利用は減らすこと。これはコードを読みやすくする他、elseの行を読んでそれを記憶しておくという精神的な負担を減らせるからである。
 ・コアな、もしくは重要なフローに関しては最小限のインデントにするべきである。
 
-```
+```ruby
 # bad
 def compute
   server = find_server
@@ -739,7 +743,7 @@ end
 ```
 ・ループ処理の条件式ブロックにおいては、nextの利用が望ましい。
 
-```
+```ruby
 # bad
 [0, 1, 2, 3].each do |item|
   if item > 1
@@ -761,7 +765,7 @@ end
 理由を説明できない場合は、for文を利用してはならない。ほとんどの場合はイテレータが使われるべきである。
 for文はeach文の観点から利用されるが、（そしてあなたは間接参照レベルを追加するだろう。）しかし、ひねりを加えて、すなわちforはeachとは異なり、新しいスコープにはならないため、ブロック内に定義されている変数は外から見えるようになる。
 
-```
+```ruby
 arr = [1, 2, 3]
 
 # bad
@@ -772,9 +776,10 @@ end
 # good
 arr.each { |elem| puts elem }
 ```
+
 1行のブロックにはdo...endよりも{...}が好ましい。{...}は複数行のブロック（複数行のチェーンはいつも醜い）には使われるべきではない。do...endは制御フローやメソッド定義にて常に使われるべきである（例えばrakefileやDSLなど）。チェインする際にはdo...endの利用は避けるべきである。
 
-```
+```ruby
 names = ["Bozhidar", "Steve", "Sarah"]
 
 # good
@@ -809,7 +814,7 @@ end.map { |name| name.upcase }
 
 ・簡略化した代入演算子は常に利用されなければならない。
 
-```
+```ruby
 # bad
 x = x + y
 x = x * y
@@ -829,7 +834,7 @@ x &&= y
 
 ・1行のクラス定義内を除いては、セミコロンの利用は避けなければならない。セミコロンの利用が適切な際には、コーディングに直接隣接するべき、すなわちセミコロンの前に空白があってはならない。
 
-```
+```ruby
 # bad
 puts 'foobar'; # superfluous semicolon
 puts 'foo'; puts 'bar' # two expressions on the same line
@@ -845,7 +850,7 @@ puts 'foo', 'bar' # this applies to puts in particular
 
 ::は定数（この定数にはクラスやモジュールも含まれている）、もしくはコンストラクタ（Array() or Nokogiri::HTML()）を参照する際にのみ使われる。通常のメソッド呼び出しに使われるべきではない。
 
-```
+```ruby
 # bad
 SomeClass::some_method
 some_object::some_method
@@ -859,7 +864,7 @@ SomeModule::SomeClass()
 
 ・必要ないところでreturnの利用は避けるべきである。
 
-```
+```ruby
 # bad
 def some_method(some_arr)
   return some_arr.size
@@ -870,9 +875,10 @@ def some_method(some_arr)
   some_arr.size
 end
 ```
+
 ・条件文内においては、=の返り値は使われるべきではない。
 
-```
+```ruby
 # bad - shows intended use of assignment
 if (v = array.grep(/foo/))
   ...
@@ -892,14 +898,14 @@ end
 
 ・変数を初期化するために||=は自由に利用してよい。
 
-```
+```ruby
 # set name to Bozhidar, only if it's nil or false
 name ||= 'Bozhidar'
 ```
 
 ・真偽値の変数においては、||=は利用してはならない。(値がfalseだった場合を考えてみるといいだろう。)
 
-```
+```ruby
 # bad - would set enabled to true even if it was false
 enabled ||= true
 
@@ -909,7 +915,7 @@ enabled = true if enabled.nil?
 
 ・ラムダ式を呼び出す際には、明示的に.callを使うべきである。
 
-```
+```ruby
 # bad
 lambda.(x, y)
 
@@ -921,7 +927,7 @@ lambda.call(x, y)
 
 ・メソッドブロックが１つの引数しか取らない場合、その中身は属性を単に読み込むこと、もしくは引数のない１つのメソッドを呼び出すことで構成される。簡略化した、&:が使われるべきである。
 
-```
+```ruby
 # bad
 bluths.map { |bluth| bluth.occupation }
 bluths.select { |bluth| bluth.blue_self? }
@@ -933,7 +939,7 @@ bluths.select(&:blue_self?)
 
 ・現在のインスタンスを呼び出す際にはself.some_methodよりもsome_methodが好まれる。
 
-```
+```ruby
 # bad
 def end_date
   self.start_date + self.nights
@@ -955,7 +961,7 @@ end
 その理由はrubyの定数は実際には変わりやすいのである。
 freezeを呼び出せばそれらは全て一定になるし、修正しようとすれば例外となる。rubyver2.2以下のものはfreezeを使うことによる固定化が許されている。
 
-```
+```ruby
 # bad
 class Color
   RED = 'red'
@@ -1001,10 +1007,10 @@ end
 ・他の定数にはスクリーミングスネークケースを使うこと。
 ・述語メソッド(真偽値を返すメソッド)は？で終わること。
 ・潜在的に危険なメソッド(selfの中身や引数を修正する)は最後に!をつけること。
-　非破壊的メソッドが存在するときのみ、破壊的メソッドは利用できる。
+  非破壊的メソッドが存在するときのみ、破壊的メソッドは利用できる。
 ・スローアウェイメソッドには＿を命名すること。
 
-```
+```ruby
 version = '3.2.1'
 major_version, minor_version, _ = version.split('.')
 ```
@@ -1012,7 +1018,7 @@ major_version, minor_version, _ = version.split('.')
 #クラス
 ・継承において扱いにくい挙動を避けるため、クラス変数の利用は避けるべきである。
 
-```
+```ruby
 class Parent
   @@class_var = 'parent'
 
@@ -1033,7 +1039,7 @@ Parent.print_class_var # => will print "child"
 ・シングルトンメソッドを定義するために、def self.methodは利用しなければならない。
 こうすることでリファクタリングに対して、メソッドを変更しにくいものにする。
 
-```
+```ruby
 class TestClass
   # bad
   def TestClass.some_method
@@ -1049,7 +1055,7 @@ class TestClass
 ・必要がない限り、class << selfの利用は避けるべきである。
 例えば、単一のアクセサやエイリアス化された属性などである。
 
-```
+```ruby
 class TestClass
   # bad
   class << self
@@ -1080,7 +1086,7 @@ end
 
 ・publicやprotected、privateに関してはインデントをつける。その深さはそれらを適用しているメソッドと同じである。その上下にはブランクを作ること。
 
-```
+```ruby
 class SomeClass
   def public_method
     # ...
@@ -1098,7 +1104,7 @@ end
 
 ・フロー制御に関しては、例外を使ってはならない。
 
-```
+```ruby
 # bad
 begin
   n / d
@@ -1116,7 +1122,7 @@ end
 
 ・例外クラスのレスキューは避けるべきである。
 
-```
+```ruby
 # bad
 begin
   # an exception occurs here
@@ -1142,7 +1148,7 @@ end
 ・raiseの２パターンの引数に関しては、明示的にRuntimeerrorを特定してはならない。
 サブクラスを用意し、エラー作成を行うべきである。
 
-```
+```ruby
 # bad
 raise RuntimeError, 'message'
 
@@ -1156,7 +1162,7 @@ raise MyExplicitError
 
 ・例外インスタンスの代わりに、raiseするための２つの分割された引数として、例外クラスとメッセージを作成することが好まれる。
 
-```
+```ruby
 # bad
 raise SomeException.new('message')
 # Note that there is no way to do `raise SomeException.new('message'), backtrace`.
@@ -1168,7 +1174,7 @@ raise SomeException, 'message'
 
 ・修飾子フォームにおいては、レスキューを使うことは避けるべきである。
 
-```
+```ruby
 # bad
 read_file rescue handle_error($!)
 
@@ -1184,12 +1190,12 @@ end
 
 ・collectよりもmapが好まれる。
 ・findよりもdetectが好まれる。ActiveRecordのfindメソッドによれば、findの利用は曖昧なものである。
-　detectを利用することで、ActiveRecordではなく、Rubyを利用しているということが明確になる。
+ detectを利用することで、ActiveRecordではなく、Rubyを利用しているということが明確になる。
 ・injectよりもreduceが好まれる。
 ・挙動をよりよくするために、lengthやcountよりもsizeが好まれる。
 ・パラメーターをコンストラクタに通す必要がない限り、ハッシュと配列リテラルの表記法が好まれる。
 
-```
+```ruby
 # bad
 arr = Array.new
 hash = Hash.new
@@ -1205,7 +1211,7 @@ x = Hash.new { |h, k| h[k] = {} }
 #文字列
 ・文字列連結よりも文字列補完の方が好ましい。
 
-```
+```ruby
 # bad
 email_with_name = user.name + ' <' + user.email + '>'
 
@@ -1216,7 +1222,7 @@ email_with_name = "#{user.name} <#{user.email}>"
 ・さらにいうならば、Ruby1.9のスタイルを覚えておくと良い。
 例えば、キャッシュのキーを構成を下記のようにしたいとするならば。。。。
 
-```
+```ruby
 
 CACHE_KEY = '_store'
 
@@ -1226,7 +1232,7 @@ cache.write(@user.id + CACHE_KEY)
 
 下記のようにしなければならない。
 
-```
+```ruby
 CACHE_KEY = '%d_store'
 
 cache.write(CACHE_KEY % @user.id)
@@ -1236,7 +1242,7 @@ cache.write(CACHE_KEY % @user.id)
 ・大きなデータを構築する必要がある際には、string#+の利用は避けるべき。
 代わりに、String#<<を使うべきである。連結することで、所定の位置にある文字列が変化し、String#+よりは確実に早い。そしてそれは、新しい文字列オブジェクトの塊を生み出す。
 
-```
+```ruby
 # good and also fast
 html = ''
 html << '<h1>Page title</h1>'
@@ -1249,7 +1255,7 @@ end
 
 ・複数行における文字列の補完を行う際には、+や<<の利用はせず、最後に\をつけること。
 
-```
+```ruby
 # bad
 "Some string is really long and " +
   "spans multiple lines."
@@ -1267,7 +1273,7 @@ end
 ・$１〜９の利用は避けるべきである。それらが含んでいるものをトラッキングすることが難しいからである。
 代わりにグループ名をつけることで、対応する必要がある。
 
-```
+```ruby
 # bad
 /(regexp)/ =~ string
 ...
@@ -1282,7 +1288,7 @@ process meaningful_var
 
 ・^と$の利用は気をつけなければならない。 それらは文字列の最後に合致するものを取るのではなく、行の最初と最後に合致するものを取ってくるからである。もし、もし文字列全体で合うものを探したければ、\A と\zを使うべきである。
 
-```
+```ruby
 string = "some injection\nusername"
 string[/^username$/]   # matches
 string[/\Ausername\z/] # don't match
@@ -1290,7 +1296,7 @@ string[/\Ausername\z/] # don't match
 
 ・複雑なregexp（正規表現）に関しては、修飾子xを利用しよう。読みやすくなるし、有用なコメントをつけることもできる。空白が無視されるので気をつけよう。
 
-```
+```ruby
 regexp = %r{
   start         # some text
   \s            # white space char
@@ -1301,9 +1307,10 @@ regexp = %r{
 ```
 
 #%記法
+
 ・一貫性を持たせるため、また％記法の挙動はメソッド呼び出しに近いため、％気泡を使う際には中かっこや大かっこ、｜｜よりも、小かっこが好まれる。
 
-```
+```ruby
 # bad
 %w[date locale]
 %w{date locale}
@@ -1315,14 +1322,14 @@ regexp = %r{
 ```
 ・%wは自由に使って良い
 
-```
+```ruby
 STATES = %w(draft open closed)
 ```
 
 ・埋め込みダブルクォーテーションと補間が必要な1行の文字列に関しては、%()を利用する。
 複数行に渡る場合はヒアドキュメントが良い。
 
-```
+```ruby
 
 # bad - no interpolation needed
 %(<div class="text">Some text</div>)
@@ -1343,7 +1350,7 @@ STATES = %w(draft open closed)
 
 ・'/'が２本以上使われる正規表現においてのみ、%rを使う。
 
-```
+```ruby
 # bad
 %r(\s+)
 
@@ -1358,7 +1365,7 @@ STATES = %w(draft open closed)
 
 ・バッククォートがあるコマンドを呼び出さない限りは、％xの利用は避けるべきである（ほとんどないとは思われるが）
 
-```
+```ruby
 # bad
 date = %x(date)
 
@@ -1371,7 +1378,7 @@ echo = %x(echo `date`)
 #Railsにおける規則
 ・renderやredirect_toを読んだ後に、すぐに返りが欲しい際にはreturnを同じ行ではなく、次に行に書くべきである。
 
-```
+```ruby
 # bad
 render :text => 'Howdy' and return
 
@@ -1392,7 +1399,7 @@ end
 ##スコープ
 アクティブレコードにスコープを定義する際には、ラムダ式を利用すること。普通のリレーションではデータベースの連動時間がクラスの読み込み時間と同等になってしまう。(インスタンス起動)
 
-```
+```ruby
 
 # bad
 scope :foo, where(:bar => 1)
